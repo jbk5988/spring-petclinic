@@ -3,9 +3,14 @@
  */
 package org.springframework.samples.petclinic.migrate;
 
+import org.springframework.stereotype.Component;
+
 /**
  * @author Gibran
  */
+@Component
 public class Migrate {
-
+    public void run() {
+        System.out.println("Runner works");
+    }
 }

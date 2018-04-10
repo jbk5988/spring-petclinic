@@ -16,20 +16,32 @@
 
 package org.springframework.samples.petclinic;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.samples.petclinic.migrate.Migrate;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * PetClinic Spring Boot Application.
- * 
+ *
  * @author Dave Syer
  *
  */
+@EnableAsync
 @SpringBootApplication
-public class PetClinicApplication {
-
+public class PetClinicApplication implements CommandLineRunner {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(PetClinicApplication.class, args);
+    }
+
+    @Autowired
+    Migrate migrate;
+
+    @Override
+    public void run(String... strings) throws Exception {
+        migrate.run();
     }
 
 }
