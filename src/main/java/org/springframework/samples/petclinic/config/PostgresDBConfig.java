@@ -16,7 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 @Configuration
 @PropertySource({ "classpath:application.properties" })
-@EnableJpaRepositories(basePackages = "org.springframework.samples.petclinic", entityManagerFactoryRef = "userEntityManager", transactionManagerRef = "userTransactionManager")
+@EnableJpaRepositories(basePackages = "org.springframework.samples.petclinic", entityManagerFactoryRef = "postMigrationEntityManager", transactionManagerRef = "postMigrationTransactionManager")
 public class PostgresDBConfig {
     @Autowired
     private Environment env;
@@ -26,9 +26,9 @@ public class PostgresDBConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean userEntityManager() {
+    public LocalContainerEntityManagerFactoryBean postMigrationEntityManager() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(userDataSource());
+        em.setDataSource(postMigrationDataSource());
         em.setPackagesToScan(new String[] { "org.springframework.samples.petclinic" });
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
@@ -37,13 +37,14 @@ public class PostgresDBConfig {
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", env.getProperty("hibernate.postgresdialect"));
         properties.put("hibernate.temp.use_jdbc_metadata_defaults",false);
+
         em.setJpaPropertyMap(properties);
 
         return em;
     }
 
     @Bean
-    public DataSource userDataSource() {
+    public DataSource postMigrationDataSource() {
         final DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("postgres.datasource.driver-class-name"));
         dataSource.setUrl(env.getProperty("postgres.datasource.url"));
@@ -55,9 +56,9 @@ public class PostgresDBConfig {
     }
 
     @Bean
-    public PlatformTransactionManager userTransactionManager() {
+    public PlatformTransactionManager postMigrationTransactionManager() {
         final JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(userEntityManager().getObject());
+        transactionManager.setEntityManagerFactory(postMigrationEntityManager().getObject());
         return transactionManager;
     }
 

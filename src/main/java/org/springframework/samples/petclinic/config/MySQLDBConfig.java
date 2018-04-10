@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 @Configuration
 @PropertySource({ "classpath:application.properties" })
-@EnableJpaRepositories(basePackages = "org.springframework.samples.petclinic", entityManagerFactoryRef = "userEntityManager", transactionManagerRef = "userTransactionManager")
+@EnableJpaRepositories(basePackages = "org.springframework.samples.petclinic.oldDataStore", entityManagerFactoryRef = "userEntityManager", transactionManagerRef = "userTransactionManager")
 public class MySQLDBConfig {
     @Autowired
     private Environment env;
@@ -33,7 +33,7 @@ public class MySQLDBConfig {
     public LocalContainerEntityManagerFactoryBean userEntityManager() {
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(userDataSource());
-        em.setPackagesToScan(new String[] { "org.springframework.samples.petclinic" });
+        em.setPackagesToScan(new String[] { "org.springframework.samples.petclinic.oldDataStore" });
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);

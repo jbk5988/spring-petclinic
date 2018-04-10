@@ -3,9 +3,16 @@
  */
 package org.springframework.samples.petclinic.oldDataStore.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+import org.springframework.samples.petclinic.model.NamedEntity;
+
 /**
  * @author Gibran
  */
-public class PetTypeOld {
+@Entity
+@Table(name = "types")
+public class PetTypeOld extends NamedEntity {
 
 }
