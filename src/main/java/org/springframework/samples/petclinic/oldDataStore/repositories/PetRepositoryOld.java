@@ -3,7 +3,9 @@
  */
 package org.springframework.samples.petclinic.oldDataStore.repositories;
 
+import java.util.Collection;
 import java.util.List;
+import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.Repository;
 import org.springframework.samples.petclinic.oldDataStore.entities.PetOld;
@@ -37,5 +39,12 @@ public interface PetRepositoryOld extends Repository<PetOld, Integer> {
      */
     void save(PetOld pet);
 
+    /**
+     * Retrieve all <code>PetOld</code>s from the data store.
+     *
+     * @return a <code>PetOld</code> of <code>Owner</code>s
+     */
+    @Transactional(readOnly = true)
+    Collection<PetOld> findAll() throws DataAccessException;
 }
 

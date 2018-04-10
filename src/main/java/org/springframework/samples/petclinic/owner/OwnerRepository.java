@@ -70,5 +70,5 @@ public interface OwnerRepository extends Repository<Owner, Integer> {
      */
     void save(Owner owner);
 
-
+    void deleteAll();
 }

@@ -3,39 +3,43 @@
  */
 package org.springframework.samples.petclinic.newDataStore;
 
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.regex.Pattern;
-
 import org.junit.Before;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.samples.petclinic.oldDataStore.entities.OwnerOld;
+import org.springframework.samples.petclinic.oldDataStore.repositories.OwnerRepositoryOld;
 import org.springframework.samples.petclinic.owner.Owner;
 import org.springframework.samples.petclinic.owner.OwnerRepository;
 import org.springframework.samples.petclinic.owner.StaticOwner;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import static org.junit.Assert.*;
-import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
 
 /**
  * @author Gibran
  */
 @RunWith(SpringRunner.class)
 @DataJpaTest
+@ActiveProfiles("junit")
+@AutoConfigureTestDatabase(replace=AutoConfigureTestDatabase.Replace.NONE)
 public class NewOwnerStoreTest {
 
     private static final int TEST_OWNER_ID = 1;
 
     @Autowired
     OwnerRepository ownerRepository;
+
+    @Autowired
+    OwnerRepositoryOld oldOwnerRepository;
 
     NewOwnerStore testOwnerStore;
 
@@ -60,6 +64,22 @@ public class NewOwnerStoreTest {
         doReturn("Doe").when(owner).getLastName();
         given(this.ownerRepository.findById(TEST_OWNER_ID)).willReturn(owner);
         */
+    }
+
+    @Test
+    public void tesOldStore () {
+        Collection<OwnerOld> oldData = oldOwnerRepository.findAll();
+
+        Iterator<OwnerOld> iterator = oldData.iterator();
+        System.out.println(oldData.size());
+
+        for (Integer id: ownerStore.keySet()){
+
+            if(iterator.hasNext()) {
+                OwnerOld oldOwner = iterator.next();
+                System.out.println(oldOwner);
+            }
+        }
     }
 
     @Test
