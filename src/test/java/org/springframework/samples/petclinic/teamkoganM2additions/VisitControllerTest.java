@@ -1,16 +1,16 @@
 package org.springframework.samples.petclinic.teamkoganM2additions;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 import java.util.HashMap;
 
 import org.junit.Test;
-import org.springframework.samples.petclinic.owner.Pet;
-import org.springframework.samples.petclinic.owner.PetRepository;
-import org.springframework.samples.petclinic.owner.VisitController;
-import org.springframework.samples.petclinic.visit.Visit;
-import org.springframework.samples.petclinic.visit.VisitRepository;
+import org.springframework.samples.petclinic.newDataStore.owner.Pet;
+import org.springframework.samples.petclinic.newDataStore.owner.PetRepository;
+import org.springframework.samples.petclinic.newDataStore.owner.VisitController;
+import org.springframework.samples.petclinic.newDataStore.visit.Visit;
+import org.springframework.samples.petclinic.newDataStore.visit.VisitRepository;
 
 public class VisitControllerTest
 {

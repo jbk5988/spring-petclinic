@@ -6,6 +6,16 @@ package org.springframework.samples.petclinic.migrate;
 import java.util.Collection;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.newDataStore.owner.Owner;
+import org.springframework.samples.petclinic.newDataStore.owner.OwnerRepository;
+import org.springframework.samples.petclinic.newDataStore.owner.Pet;
+import org.springframework.samples.petclinic.newDataStore.owner.PetRepository;
+import org.springframework.samples.petclinic.newDataStore.owner.PetType;
+import org.springframework.samples.petclinic.newDataStore.vet.Specialty;
+import org.springframework.samples.petclinic.newDataStore.vet.Vet;
+import org.springframework.samples.petclinic.newDataStore.vet.VetRepository;
+import org.springframework.samples.petclinic.newDataStore.visit.Visit;
+import org.springframework.samples.petclinic.newDataStore.visit.VisitRepository;
 import org.springframework.samples.petclinic.oldDataStore.entities.OwnerOld;
 import org.springframework.samples.petclinic.oldDataStore.entities.PetOld;
 import org.springframework.samples.petclinic.oldDataStore.entities.PetTypeOld;
@@ -16,20 +26,12 @@ import org.springframework.samples.petclinic.oldDataStore.repositories.OwnerRepo
 import org.springframework.samples.petclinic.oldDataStore.repositories.PetRepositoryOld;
 import org.springframework.samples.petclinic.oldDataStore.repositories.VetRepositoryOld;
 import org.springframework.samples.petclinic.oldDataStore.repositories.VisitRepositoryOld;
-import org.springframework.samples.petclinic.owner.Owner;
-import org.springframework.samples.petclinic.owner.OwnerRepository;
-import org.springframework.samples.petclinic.owner.Pet;
-import org.springframework.samples.petclinic.owner.PetRepository;
-import org.springframework.samples.petclinic.owner.PetType;
-import org.springframework.samples.petclinic.vet.Specialty;
-import org.springframework.samples.petclinic.vet.Vet;
-import org.springframework.samples.petclinic.vet.VetRepository;
-import org.springframework.samples.petclinic.visit.Visit;
-import org.springframework.samples.petclinic.visit.VisitRepository;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Gibran
  */
+@Component
 public class ForkLift {
 
     @Autowired
@@ -59,13 +61,15 @@ public class ForkLift {
 
     public void forkLiftOldOwners() {
 
-        currentOwnerRepo.deleteAll();
+        System.out.println("Forklifting owners started");
         Collection<OwnerOld> oldData = oldOwnerRepo.findAll();
-
+        System.out.println("Size of old table" + oldData.size() );
         for (OwnerOld owner : oldData) {
+            System.out.println("Forklifting owner " + owner.getLastName());
             Owner migratedOwner = convertOwnerOldToOwner(owner);
             currentOwnerRepo.save(migratedOwner);
         }
+        System.out.println("Forklifting owners ended");
     }
 
     public void forkLiftOldPets() {
@@ -111,11 +115,12 @@ public class ForkLift {
         owner.setCity(oldOwner.getCity());
         owner.setTelephone(oldOwner.getTelephone());
 
-        for(PetOld pet : oldOwner.getPets()){
-            Pet migratePet = convertPetOldToPet(pet);
-            migratePet.setOwner(owner);
-            owner.addPet(migratePet);
-        }
+//        for(PetOld pet : oldOwner.getPets()){
+//            System.out.println("Pets are " + pet);
+//            Pet migratePet = convertPetOldToPet(pet);
+//            migratePet.setOwner(owner);
+//            owner.addPet(migratePet);
+//        }
         return owner;
     }
 

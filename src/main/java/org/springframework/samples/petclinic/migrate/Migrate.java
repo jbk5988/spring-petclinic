@@ -3,6 +3,7 @@
  */
 package org.springframework.samples.petclinic.migrate;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -10,7 +11,12 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Migrate {
+
+    @Autowired
+    private ForkLift forkLift;
+
     public void run() {
-        System.out.println("Runner works");
+        forkLift.forkLiftOldOwners();
+        ConsistencyCheck.forkLifted();
     }
 }

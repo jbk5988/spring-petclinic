@@ -8,19 +8,20 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
-
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
-import org.springframework.samples.petclinic.model.Person;
+import org.springframework.samples.petclinic.oldDataStore.model.Person;
 
 /**
  * @author Gibran
@@ -41,7 +42,7 @@ public class OwnerOld extends Person {
     @Digits(fraction = 0, integer = 10)
     private String telephone;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
+    @OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "owner")
     private Set<PetOld> pets;
 
     public String getAddress() {
@@ -68,7 +69,7 @@ public class OwnerOld extends Person {
         this.telephone = telephone;
     }
 
-    protected Set<PetOld> getPetsInternal() {
+    public Set<PetOld> getPetsInternal() {
         if (this.pets == null) {
             this.pets = new HashSet<>();
         }

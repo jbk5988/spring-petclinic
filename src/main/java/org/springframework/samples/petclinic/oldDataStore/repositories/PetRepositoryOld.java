@@ -21,7 +21,7 @@ public interface PetRepositoryOld extends Repository<PetOld, Integer> {
      * Retrieve all {@link PetTypeOld}s from the data store.
      * @return a Collection of {@link PetTypeOld}s.
      */
-    @Query("SELECT ptype FROM PetType ptype ORDER BY ptype.name")
+    @Query("SELECT ptype FROM PetTypeOld ptype ORDER BY ptype.name")
     @Transactional(readOnly = true)
     List<PetTypeOld> findPetTypes();
 
@@ -42,7 +42,7 @@ public interface PetRepositoryOld extends Repository<PetOld, Integer> {
     /**
      * Retrieve all <code>PetOld</code>s from the data store.
      *
-     * @return a <code>PetOld</code> of <code>Owner</code>s
+     * @return a <code>PetOld</code> of <code>PetOld</code>s
      */
     @Transactional(readOnly = true)
     Collection<PetOld> findAll() throws DataAccessException;

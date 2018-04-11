@@ -6,10 +6,9 @@ package org.springframework.samples.petclinic.newDataStore;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
-import org.springframework.samples.petclinic.owner.Owner;
-import org.springframework.samples.petclinic.owner.OwnerRepository;
-import org.springframework.samples.petclinic.owner.StaticOwner;
+import org.springframework.samples.petclinic.newDataStore.owner.Owner;
+import org.springframework.samples.petclinic.newDataStore.owner.OwnerRepository;
+import org.springframework.samples.petclinic.newDataStore.owner.StaticOwner;
 
 /**
  * @author Gibran

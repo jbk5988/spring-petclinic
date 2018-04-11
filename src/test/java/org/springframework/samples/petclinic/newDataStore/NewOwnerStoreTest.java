@@ -17,9 +17,9 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.samples.petclinic.oldDataStore.entities.OwnerOld;
 import org.springframework.samples.petclinic.oldDataStore.repositories.OwnerRepositoryOld;
-import org.springframework.samples.petclinic.owner.Owner;
-import org.springframework.samples.petclinic.owner.OwnerRepository;
-import org.springframework.samples.petclinic.owner.StaticOwner;
+import org.springframework.samples.petclinic.newDataStore.owner.Owner;
+import org.springframework.samples.petclinic.newDataStore.owner.OwnerRepository;
+import org.springframework.samples.petclinic.newDataStore.owner.StaticOwner;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import static org.junit.Assert.assertEquals;

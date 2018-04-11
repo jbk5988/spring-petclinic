@@ -25,7 +25,7 @@ public interface OwnerRepositoryOld extends Repository<OwnerOld, Integer> {
      * @return a Collection of matching {@link OwnerOld}s (or an empty Collection if none
      * found)
      */
-    @Query("SELECT DISTINCT owner FROM Owner owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName%")
+    @Query("SELECT DISTINCT owner FROM OwnerOld owner left join fetch owner.pets WHERE owner.lastName LIKE :lastName%")
     @Transactional(readOnly = true)
     Collection<OwnerOld> findByLastName(@Param("lastName") String lastName);
 
@@ -34,7 +34,7 @@ public interface OwnerRepositoryOld extends Repository<OwnerOld, Integer> {
      * @param id the id to search for
      * @return the {@link OwnerOld} if found
      */
-    @Query("SELECT owner FROM Owner owner left join fetch owner.pets WHERE owner.id =:id")
+    @Query("SELECT owner FROM OwnerOld owner left join fetch owner.pets WHERE owner.id =:id")
     @Transactional(readOnly = true)
     OwnerOld findById(@Param("id") Integer id);
 

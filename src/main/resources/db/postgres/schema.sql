@@ -1,25 +1,4 @@
-CREATE DATABASE IF NOT EXISTS petclinic;
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-SET row_security = off;
-
-SET search_path = public, pg_catalog;
-
-CREATE SEQUENCE owners_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-ALTER TABLE owners_seq OWNER TO postgres;
-
+-- CREATE DATABASE petclinic;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -34,15 +13,6 @@ CREATE TABLE owners (
     CONSTRAINT owners_id_check CHECK ((id > 0))
 );
 
-CREATE SEQUENCE pets_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-ALTER TABLE pets_seq OWNER TO postgres;
-
 CREATE TABLE pets (
     id integer DEFAULT nextval('pets_seq'::regclass) NOT NULL,
     name character varying(30),
@@ -56,15 +26,6 @@ CREATE TABLE pets (
 
 ALTER TABLE pets OWNER TO postgres;
 
-CREATE SEQUENCE specialties_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-ALTER TABLE specialties_seq OWNER TO postgres;
-
 CREATE TABLE specialties (
     id integer DEFAULT nextval('specialties_seq'::regclass) NOT NULL,
     name character varying(80),
@@ -72,16 +33,6 @@ CREATE TABLE specialties (
 );
 
 ALTER TABLE specialties OWNER TO postgres;
-
-CREATE SEQUENCE types_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE types_seq OWNER TO postgres;
 
 CREATE TABLE types (
     id integer DEFAULT nextval('types_seq'::regclass) NOT NULL,
@@ -100,16 +51,6 @@ CREATE TABLE vet_specialties (
 
 ALTER TABLE vet_specialties OWNER TO postgres;
 
-CREATE SEQUENCE vets_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE vets_seq OWNER TO postgres;
-
 CREATE TABLE vets (
     id integer DEFAULT nextval('vets_seq'::regclass) NOT NULL,
     first_name character varying(30),
@@ -117,17 +58,7 @@ CREATE TABLE vets (
     CONSTRAINT vets_id_check CHECK ((id > 0))
 );
 
-
 ALTER TABLE vets OWNER TO postgres;
-
-CREATE SEQUENCE visits_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-ALTER TABLE visits_seq OWNER TO postgres;
 
 CREATE TABLE visits (
     id integer DEFAULT nextval('visits_seq'::regclass) NOT NULL,

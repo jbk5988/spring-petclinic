@@ -19,7 +19,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 public class AsyncCronRunnerConfig {
 
     @Bean(name = "ConsistencyCheckThread")
-    public Executor ConsistencyCheckerThread() {
+    public Executor ConsistencyCheckThread() {
         return new ThreadPoolTaskExecutor();
     }
 

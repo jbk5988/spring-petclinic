@@ -1,9 +1,9 @@
 package org.springframework.samples.petclinic.teamkoganM2additions;
 
 import org.junit.Test;
-import org.springframework.samples.petclinic.owner.PetRepository;
-import org.springframework.samples.petclinic.owner.PetType;
-import org.springframework.samples.petclinic.owner.PetTypeFormatter;
+import org.springframework.samples.petclinic.newDataStore.owner.PetRepository;
+import org.springframework.samples.petclinic.newDataStore.owner.PetType;
+import org.springframework.samples.petclinic.newDataStore.owner.PetTypeFormatter;
 
 import static org.mockito.Mockito.*;
 
